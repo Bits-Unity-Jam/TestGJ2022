@@ -28,7 +28,9 @@ public class CubeController : MonoBehaviour, IMovementController
     {
             Vector3 moving = path.DirectionOnPoint(transform.position) * speed;
             moving.x += Direction;
-            transform.position += moving * Time.deltaTime;
+            moving -= Physics.gravity;
+            
+
     }
 }
 }
