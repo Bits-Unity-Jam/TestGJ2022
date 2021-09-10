@@ -1,17 +1,17 @@
-using Mechanics.Obstacles;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Management;
+
 
 namespace Mechanics.Paths
 {
     public class Segment : MonoBehaviour
     {
-        [SerializeField] private List<ObstacleSpawnPoint> obstaclesSpawnPoints;
-        //private List<Obstacle> spawnedObstacles;
+        [SerializeField] private List<ObstaclesSpawnPoint> obstaclesSpawnPoints;
         
-       // public List<ObstaclesSpawnPoint> ObstaclesSpawnPoints { get => obstaclesSpawnPoints; }
+        
+       public List<ObstaclesSpawnPoint> ObstaclesSpawnPoints { get => obstaclesSpawnPoints; }
         
 
         [SerializeField]
@@ -30,8 +30,10 @@ namespace Mechanics.Paths
         }
         void Spawn()
         {
-            spawnedObstacles.Add(Management.ObstacleSpawner.Instance.GetObstacle());
+            Obstacle obstacle = ObstacleSpawner.Instance.getObstacle();
+            obstacle.transform.position = ObstaclesSpawnPoints[0].transform.position;
         }
+      
 
     }
 }
