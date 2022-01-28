@@ -8,6 +8,8 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] List<Obstacle> obstacles;
     [SerializeField] int obstaclePoolCount;
 
+
+
     private List<Obstacle> obstaclePool = new List<Obstacle>();
 
     public static ObstacleSpawner Instance { get => instance; }
@@ -29,14 +31,25 @@ public class ObstacleSpawner : MonoBehaviour
         for (int i = 0; i < obstaclePoolCount; i++)
         {
             Obstacle obstacle = Instantiate(obstacles[Random.Range(0, obstacles.Count)]);
+            
             obstacle.gameObject.SetActive(false);
             obstaclePool.Add(obstacle);
+            
         }
     }
-    public Obstacle getObstacle()
+        public void AddObstacle(Obstacle obstacle)
     {
-        Obstacle obstacle = obstaclePool[Random.Range(0, obstaclePoolCount)];
+        obstaclePool.Add(obstacle);
+        obstacle.gameObject.SetActive(false);
+        
+    }
+
+    public Obstacle getObstacle()
+    {   
+        Obstacle obstacle = obstaclePool[Random.Range(0, obstaclePool.Count)];// 
         obstacle.gameObject.SetActive(true);
+        obstaclePool.Remove(obstacle);
+        
         return obstacle;
 
     }

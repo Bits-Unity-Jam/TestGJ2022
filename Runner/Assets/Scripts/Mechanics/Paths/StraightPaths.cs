@@ -39,11 +39,12 @@ namespace Mechanics.Paths
         {
             var segment = segmentsPool[Random.Range(0, segmentsPool.Count)];
             segmentsPool.Remove(segment);
-            segment.gameObject.SetActive(true);
             Vector3 backPointVector = segment.transform.position - segment.BorderBack.transform.position;
 
             segment.transform.position = currentPoint + backPointVector;
             currentPoint.z = segment.BorderFront.position.z;
+            segment.gameObject.SetActive(true);
+
             segmentQueue.Enqueue(segment);
             return currentPoint;
         }
@@ -83,6 +84,7 @@ namespace Mechanics.Paths
             {
                 Segment segment = Instantiate(segments[Random.Range(0, segments.Count)]);
                 segment.gameObject.SetActive(false);
+                segment.Initialized = true;
                 segmentsPool.Add(segment);
             }
         }
